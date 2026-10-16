@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Feliz Cumpleaños 💎</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    text-align: center;
+    background: radial-gradient(circle at top, #34205e, #090619 75%);
+    overflow-x: hidden;
+}
+
+.estrellas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.estrella {
+    position: absolute;
+    color: #fff5c4;
+    animation: brillar 2s infinite alternate;
+}
+
+@keyframes brillar {
+    from { opacity: 0.25; transform: scale(0.7); }
+    to { opacity: 1; transform: scale(1.3); }
+}
+
+.contenedor {
+    position: relative;
+    z-index: 1;
+    width: 90%;
+    max-width: 650px;
+    margin: 35px auto;
+    padding: 30px 20px;
+    border: 1px solid #e4c7ff;
+    border-radius: 25px;
+    background: rgba(25, 14, 49, 0.88);
+    box-shadow: 0 0 35px #a855f755;
+}
+
+.diamante {
+    font-size: 55px;
+    animation: flotar 3s infinite ease-in-out;
+}
+
+@keyframes flotar {
+    50% { transform: translateY(-10px); }
+}
+
+h1 {
+    color: #ffe6a7;
+    font-size: clamp(30px, 7vw, 48px);
+    text-shadow: 0 0 20px #e8bfff;
+}
+
+h2 {
+    color: #e9c7ff;
+}
+
+p {
+    line-height: 1.8;
+    font-size: 17px;
+}
+
+.foto {
+    width: 100%;
+    max-width: 330px;
+    max-height: 380px;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 3px solid #f7dca2;
+    box-shadow: 0 0 25px #d9a7ff88;
+    margin: 15px 0;
+}
+
+button, .boton {
+    display: inline-block;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 20px;
+    margin: 7px;
+    background: linear-gradient(45deg, #b76cff, #f5d58a);
+    color: #201034;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+input, textarea {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    border: 1px solid #c99aff;
+    border-radius: 10px;
+    background: #170e2d;
+    color: white;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.galeria {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.galeria img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #e9c7ff;
+}
+
+.frase {
+    color: #ffe6a7;
+    font-style: italic;
+}
+
+#editor {
+    margin-top: 35px;
+    padding-top: 20px;
+    border-top: 1px solid #a77bd1;
+}
+
+footer {
+    margin-top: 25px;
+    color: #d8c1ef;
+}
+
+.oculto {
+    display: none;
+}
+/* Fuegos artificiales */
+.fuego-artificial {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    animation: explosion 1.4s ease-out forwards;
+    box-shadow: 0 0 10px currentColor;
+}
+
+@keyframes explosion {
+    0% {
+        transform: translate(0, 0) scale(0.3);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--x), var(--y)) scale(1.5);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="estrellas" id="estrellas"></div>
+
+<main class="contenedor">
+
+    <div class="diamante">💎✨💎</div>
+
+    <h1>¡Feliz Cumpleaños!</h1>
+
+    <h2 id="nombre">Para mi querido hermano 🎂</h2>
+
+    <img id="fotoPrincipal"
+     class="foto"
+     src="familia.jpg"
+     alt="Foto familiar">
+    <p id="mensaje">
+        Hoy es un día muy especial porque celebramos la vida
+        de una persona increíble: ¡mi hermano! ❤️
+    </p>
+
+    <p class="frase" id="frase">
+        Que nunca te falten motivos para sonreír,
+        sueños por cumplir y personas que te quieran.
+    </p>
+
+    <h2>🌟 Mis mejores deseos para ti 🌟</h2>
+
+    <p>
+        💎 Que tu vida brille como los diamantes.<br>
+        ⭐ Que tus sueños alcancen las estrellas.<br>
+        🎁 Que recibas mucho amor y felicidad.<br>
+        ❤️ ¡Que todos tus días estén llenos de alegría!
+    </p>
+
+    <button onclick="mostrarSorpresa()">
+        🎁 Abrir sorpresa
+    </button>
+
+    <div id="sorpresa" class="oculto">
+        <h2>🎉 ¡Eres el mejor hermano! 🎉</h2>
+        <p>
+            Gracias por formar parte de mi vida.
+            Te deseo salud, felicidad y muchos éxitos.
+            ¡Nunca dejes de brillar! 💎❤️
+        </p>
+    </div>
+
+    <h2>📸 Nuestros recuerdos</h2>
+
+    
+    <div class="galeria" id="galeria">
+    <img src="recuerdo.jpg" alt="Un recuerdo especial">
+</div>
+
+    <div id="editor">
+        <h2>✍️ Personaliza tu regalo</h2>
+
+        <p>Escribe su nombre y crea tu propio mensaje.</p>
+
+        <input id="nombreInput"
+               placeholder="Nombre de tu hermano">
+
+        <textarea id="mensajeInput"
+                  placeholder="Escribe tu dedicatoria aquí..."></textarea>
+
+        <input id="fraseInput"
+               placeholder="Escribe una frase especial">
+
+        <label for="fotoInput">📷 Añadir foto principal:</label>
+        <input type="file" id="fotoInput" accept="image/*">
+
+        <label for="fotosInput">🖼️ Añadir más fotos:</label>
+        <input type="file" id="fotosInput" accept="image/*" multiple>
+
+        <button onclick="actualizarPagina()">
+            ✨ Aplicar cambios
+        </button>
+
+        <button onclick="quitarEditor()">
+            🎀 Ocultar editor
+        </button>
+
+        <button onclick="mostrarEditor()">
+            ✏️ Editar mensaje
+        </button>
+    </div>
+
+    <footer>
+        Hecho con mucho cariño para mi hermano ❤️<br>
+        ⭐💎✨ Que tu luz nunca deje de brillar ✨💎⭐
+    </footer>
+
+</main>
+
+<script>
+// Crear estrellas en el fondo
+const fondo = document.getElementById("estrellas");
+
+for (let i = 0; i < 65; i++) {
+    const estrella = document.createElement("span");
+    estrella.className = "estrella";
+    estrella.textContent = Math.random() > 0.5 ? "✦" : "✧";
+    estrella.style.left = Math.random() * 100 + "%";
+    estrella.style.top = Math.random() * 100 + "%";
+    estrella.style.fontSize = (10 + Math.random() * 18) + "px";
+    estrella.style.animationDelay = Math.random() * 3 + "s";
+    fondo.appendChild(estrella);
+}
+
+// Mostrar la sorpresa y lanzar fuegos artificiales
+function mostrarSorpresa() {
+    const sorpresa = document.getElementById("sorpresa");
+    sorpresa.classList.toggle("oculto");
+
+    if (!sorpresa.classList.contains("oculto")) {
+        lanzarFuegosArtificiales();
+    }
+}
+
+// Cambiar nombre y mensajes
+function actualizarPagina() {
+    const nombre = document.getElementById("nombreInput").value.trim();
+    const mensaje = document.getElementById("mensajeInput").value.trim();
+    const frase = document.getElementById("fraseInput").value.trim();
+
+    if (nombre) {
+        document.getElementById("nombre").textContent =
+            "Para " + nombre + " 💙";
+    }
+
+    if (mensaje) {
+        document.getElementById("mensaje").textContent = mensaje;
+    }
+
+    if (frase) {
+        document.getElementById("frase").textContent = frase;
+    }
+localStorage.setItem("nombreCumple", nombre);
+localStorage.setItem("mensajeCumple", mensaje);
+localStorage.setItem("fraseCumple", frase);
+    alert("¡Tu dedicatoria está lista! 💎");
+}
+
+// Guardar y recuperar la foto principal
+document.getElementById("fotoInput").addEventListener("change", function () {
+    const archivo = this.files[0];
+    if (!archivo) return;
+
+    const lector = new FileReader();
+
+    lector.onload = function (e) {
+        const foto = document.getElementById("fotoPrincipal");
+        foto.src = e.target.result;
+        foto.classList.remove("oculto");
+
+        try {
+            localStorage.setItem("fotoPrincipalGuardada", e.target.result);
+        } catch (error) {
+            alert("La foto es demasiado grande. Prueba con una imagen más pequeña.");
+        }
+    };
+
+    lector.readAsDataURL(archivo);
+});
+
+// Guardar varias fotos de la galería
+document.getElementById("fotosInput").addEventListener("change", function () {
+    const galeria = document.getElementById("galeria");
+    const fotosGuardadas = JSON.parse(
+        localStorage.getItem("galeriaFotosGuardadas") || "[]"
+    );
+
+    Array.from(this.files).forEach(archivo => {
+        if (!archivo.type.startsWith("image/")) return;
+
+        const lector = new FileReader();
+
+        lector.onload = function (e) {
+            const imagen = document.createElement("img");
+            imagen.src = e.target.result;
+            imagen.alt = "Recuerdo familiar";
+            galeria.appendChild(imagen);
+
+            fotosGuardadas.push(e.target.result);
+
+            try {
+                localStorage.setItem(
+                    "galeriaFotosGuardadas",
+                    JSON.stringify(fotosGuardadas)
+                );
+            } catch (error) {
+                fotosGuardadas.pop();
+                imagen.remove();
+                alert("Se llenó el espacio de almacenamiento. Usa fotos más pequeñas.");
+            }
+        };
+
+        lector.readAsDataURL(archivo);
+    });
+
+    this.value = "";
+});
+
+// Recuperar las fotos guardadas al abrir la página
+window.addEventListener("DOMContentLoaded", function () {
+    const fotoGuardada = localStorage.getItem("fotoPrincipalGuardada");
+
+    if (fotoGuardada) {
+        const foto = document.getElementById("fotoPrincipal");
+        foto.src = fotoGuardada;
+        foto.classList.remove("oculto");
+    }
+
+    const galeria = document.getElementById("galeria");
+    const fotos = JSON.parse(
+        localStorage.getItem("galeriaFotosGuardadas") || "[]"
+    );
+
+    fotos.forEach(src => {
+        const imagen = document.createElement("img");
+        imagen.src = src;
+        imagen.alt = "Recuerdo familiar";
+        galeria.appendChild(imagen);
+    });
+});
+// Ocultar o mostrar el editor
+function quitarEditor() {
+    document.getElementById("editor").classList.add("oculto");
+}
+
+function mostrarEditor() {
+    document.getElementById("editor").classList.remove("oculto");
+}
+// Fuegos artificiales para el cumpleaños
+function lanzarFuegosArtificiales() {
+    const colores = ["#ffd700", "#ffffff", "#ff80df", "#80eaff", "#c9a0ff"];
+
+    for (let ronda = 0; ronda < 4; ronda++) {
+        setTimeout(() => {
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * (window.innerHeight * 0.6);
+
+            for (let i = 0; i < 30; i++) {
+                const chispa = document.createElement("div");
+                chispa.className = "fuego-artificial";
+
+                const angulo = (Math.PI * 2 * i) / 30;
+                const distancia = 50 + Math.random() * 100;
+
+                chispa.style.left = x + "px";
+                chispa.style.top = y + "px";
+
+                chispa.style.setProperty(
+                    "--x", Math.cos(angulo) * distancia + "px"
+                );
+
+                chispa.style.setProperty(
+                    "--y", Math.sin(angulo) * distancia + "px"
+                );
+
+                chispa.style.color =
+                    colores[Math.floor(Math.random() * colores.length)];
+
+                document.body.appendChild(chispa);
+
+                setTimeout(() => chispa.remove(), 1500);
+            }
+        }, ronda * 400);
+    }
+}
+// Recuperar la dedicatoria guardada
+window.addEventListener("DOMContentLoaded", function () {
+    const nombre = localStorage.getItem("nombreCumple");
+    const mensaje = localStorage.getItem("mensajeCumple");
+    const frase = localStorage.getItem("fraseCumple");
+
+    if (nombre) {
+        document.getElementById("nombre").textContent = "Para " + nombre + " 💙";
+    }
+
+    if (mensaje) {
+        document.getElementById("mensaje").textContent = mensaje;
+    }
+
+    if (frase) {
+        document.getElementById("frase").textContent = frase;
+    }
+});
+</script>
+<!-- Música de cumpleaños -->
+<div style="text-align:center; margin:25px; padding:20px;">
+    <h2>🎵 Música para mi hermano 🎂</h2>
+
+    <audio controls loop>
+        <source src="musica.mp3" type="audio/mpeg">
+        Tu navegador no puede reproducir este audio.
+    </audio>
+
+    <p>💎 ¡Que tu día brille como las estrellas! ✨</p>
+</div>
+</body>
+</html>
